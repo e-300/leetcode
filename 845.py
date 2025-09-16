@@ -30,8 +30,63 @@ from typing import List
 
 class Solution:
     def longestMountain(self, arr: List[int]) -> int:
-        # TODO: Implement your solution here
-        pass
+
+        if len(arr) < 3:
+            return 0
+        
+
+        count = 0
+        
+
+
+        for i in range(1,len(arr)-1):
+
+            #find peak 
+            if arr[i-1] < arr[i] > arr[i+1]:
+
+                l = i
+                r = i
+
+                #count outwards left
+                while l >= 0 and arr[l] > arr[l-1]:
+                    l-=1
+
+                #count outwards right
+                while r < len(arr)-1 and arr[r] > arr[r+1]:
+                    r+=1
+
+                #calc count 
+                count = max(count,r-l+1)
+
+        return count
+
+                
+
+            
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def test_longest_mountain():
     solution = Solution()
