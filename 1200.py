@@ -14,26 +14,26 @@ Constraints:
 """
 
 class Solution:
-    # def minimumAbsDifference(self, arr):
+    def minimumAbsDifference(self, arr):
 
-    #     arr = sorted(arr)
+        arr = sorted(arr)
 
-    #     minDiff = float('inf')
+        minDiff = float('inf')
 
 
-    #     for i in range(1,len(arr)):
+        for i in range(1,len(arr)):
 
-    #         minDiff = min(minDiff, arr[i] - arr[i-1])
+            minDiff = min(minDiff, arr[i] - arr[i-1])
 
-    #     res = []
+        res = []
 
-    #     for i in range(1,len(arr)):
+        for i in range(1,len(arr)):
 
-    #         if arr[i] - arr[i-1] == minDiff:
-    #             res.append([arr[i-1],arr[i]])
+            if arr[i] - arr[i-1] == minDiff:
+                res.append([arr[i-1],arr[i]])
 
         
-    #     return res
+        return res
     
 
     #O(n) solution
@@ -43,22 +43,22 @@ class Solution:
     # pairs that make the above true are pairs store them in res 
     # if no pairs then loop continues
 
-
-
     def minimumAbsDifference(self, arr):
 
         seen = set(arr)
-
 
         res = []
 
         for distance in range(1, (max(arr)-min(arr))+1):
 
             for num in range(min(arr), max(arr)+1):
-                
-                if num + distance in seen:
-                    res.append([num,num+distance])
                     
+                if num in arr:
+                    if num + distance in seen:
+                        res.append([num,num+distance])
+                else:
+                    continue
+                
             if res:
                 return res
             
