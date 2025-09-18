@@ -14,26 +14,26 @@ Constraints:
 """
 
 class Solution:
-    def minimumAbsDifference(self, arr):
+    # def minimumAbsDifference(self, arr):
 
-        arr = sorted(arr)
+    #     arr = sorted(arr)
 
-        minDiff = float('inf')
+    #     minDiff = float('inf')
 
 
-        for i in range(1,len(arr)):
+    #     for i in range(1,len(arr)):
 
-            minDiff = min(minDiff, arr[i] - arr[i-1])
+    #         minDiff = min(minDiff, arr[i] - arr[i-1])
 
-        res = []
+    #     res = []
 
-        for i in range(1,len(arr)):
+    #     for i in range(1,len(arr)):
 
-            if arr[i] - arr[i-1] == minDiff:
-                res.append([arr[i-1],arr[i]])
+    #         if arr[i] - arr[i-1] == minDiff:
+    #             res.append([arr[i-1],arr[i]])
 
         
-        return res
+    #     return res
     
 
     #O(n) solution
@@ -42,27 +42,95 @@ class Solution:
     # use set to check if any numbers with the current distance iteration have any partners that exactly d away
     # pairs that make the above true are pairs store them in res 
     # if no pairs then loop continues
+    # this is shit I can do better
 
-    def minimumAbsDifference(self, arr):
+    # def minimumAbsDifference(self, arr):
 
-        seen = set(arr)
+    #     seen = set(arr)
 
+    #     res = []
+
+    #     for distance in range(1, (max(arr)-min(arr))+1):
+
+    #         for num in range(min(arr), max(arr)+1):
+                    
+    #             if num in seen:
+    #                 if num + distance in seen:
+    #                     res.append([num,num+distance])
+                
+    #         if res:
+    #             return res
+            
+    #     return res
+
+
+
+    # Better O(N) solution!
+    # Use counting sort to sort the arr 
+    # Then we can use the same method used in our n log n solution to build our res arr!
+
+
+
+    def minimumAbsDifference(self,arr):
+        if len(arr) < 2:
+            return []
+
+        # Use counting sort only if range is reasonable
+        min_val = min(arr)
+        max_val = max(arr)
+        range_size = max_val - min_val + 1
+
+        if range_size > len(arr) * 2:
+            sorted_arr = sorted(arr)
+        else:
+            min_val = min(arr)
+
+            max_val = max(arr)
+
+            range_size = max_val - min_val + 1
+
+            # Initialize count
+            count = [0] * range_size
+
+            # Count frequencies, offset by min_val
+            for num in arr:
+                count[num - min_val] += 1
+
+            # Calculate cumulative positions
+            for i in range(1, range_size):
+                count[i] += count[i - 1]
+
+            # Place elements in sorted order
+            sorted_arr = [0] * len(arr)
+
+            for i in range(len(arr) - 1, -1, -1):
+                val = arr[i]
+                pos = count[val - min_val] - 1
+                sorted_arr[pos] = val
+                count[val - min_val] -= 1
+
+        # Single pass to find minimum difference and collect pairs
+        minDiff = float('inf')
         res = []
 
-        for distance in range(1, (max(arr)-min(arr))+1):
+        for i in range(1, len(sorted_arr)):
+            diff = sorted_arr[i] - sorted_arr[i-1]
 
-            for num in range(min(arr), max(arr)+1):
-                    
-                if num in arr:
-                    if num + distance in seen:
-                        res.append([num,num+distance])
-                else:
-                    continue
-                
-            if res:
-                return res
-            
+            if diff < minDiff:
+                minDiff = diff
+                res = [[sorted_arr[i-1], sorted_arr[i]]]
+                if minDiff == 0:
+                    break
+            elif diff == minDiff:
+                res.append([sorted_arr[i-1], sorted_arr[i]])
+
         return res
+
+
+
+
+
+
 
                     
 
