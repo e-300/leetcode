@@ -4,36 +4,47 @@ class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
 
 
-        left = 0
-
-        curr_sum = 0
-
-        min_lenth = float('inf')
-
-
-        for right in range(len(nums)):
-
-            curr_sum += nums[right]
-
-            while curr_sum >= target:
-
-                #print(f"minlen{min_lenth}\nright{right}\nleft{left}\ncurrentsum{curr_sum}")
-
-                min_lenth = min(min_lenth, right-left+1)
-                curr_sum-=nums[left]
-                left+=1
-
-
-        if min_lenth != float('inf'):
-            return min_lenth
-
-        return 0
+        nums = sorted(nums)
 
 
 
+        l = 0
+        r = len(nums)-1
+        minlen = 0
 
+        while l <= r:
+
+
+            if nums[r] == target or nums[l] == target:
+                minlen = 1
+
+            current_sum = nums[r] + nums[l]
+
+            if current_sum == target:
+                minlen = r - l +1
+
+            if current_sum > target:
+                r-=1
+
+            else:            
+                l+=1
+
+           
 
         
+
+
+        return minlen
+        
+        
+
+     
+        
+
+
+
+
+
 
 
 # Test cases

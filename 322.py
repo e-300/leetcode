@@ -12,11 +12,8 @@ def coinChange(coins, amount):
 
         for current_amount in range(coin, amount+1):
 
-            #print(f"BEFORE current amount {current_amount}")
 
             dp_array[current_amount] = min(dp_array[current_amount],dp_array[current_amount-coin]+1)
-
-            #print(f"AFTER current amount {current_amount}")
 
     
     return dp_array[amount] if dp_array[amount] != float('inf') else -1
