@@ -19,6 +19,39 @@ class Solution:
             current_node = next_node
 
         return prev_node
+    
+    def recursiveList(self, head: ListNode) -> ListNode:
+
+
+        # empty list
+        if head is None:
+            return None  
+        
+        # single node - BASE CASE!
+        if head.next is None:
+            return head  
+
+        newhead = self.recursiveList(head.next)
+
+
+        head.next.next = head
+
+        head.next = None
+
+        return newhead
+
+        
+
+
+
+        
+
+
+
+
+
+
+
         
             
 
@@ -57,15 +90,15 @@ if __name__ == "__main__":
     
     # Test case 1
     head1 = create_linked_list([1, 2, 3, 4, 5])
-    result1 = solution.reverseList(head1)
+    result1 = solution.recursiveList(head1)
     print(f"Test 1: {linked_list_to_array(result1)}")  # Expected: [5, 4, 3, 2, 1]
     
     # Test case 2
     head2 = create_linked_list([1, 2])
-    result2 = solution.reverseList(head2)
+    result2 = solution.recursiveList(head2)
     print(f"Test 2: {linked_list_to_array(result2)}")  # Expected: [2, 1]
     
     # Test case 3
     head3 = create_linked_list([])
-    result3 = solution.reverseList(head3)
+    result3 = solution.recursiveList(head3)
     print(f"Test 3: {linked_list_to_array(result3)}")  # Expected: []
