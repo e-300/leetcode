@@ -33,7 +33,6 @@ class Solution:
 
         newhead = self.recursiveList(head.next)
 
-
         head.next.next = head
 
         head.next = None

@@ -17,13 +17,6 @@ class Solution:
 
 
 
-
-
-
-
-
-
-
 # Helper function to create linked list from array
 def create_linked_list(arr):
     if not arr:
