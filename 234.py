@@ -20,13 +20,6 @@ class Solution:
 
 
 
-
-
-
-
-
-
-
 # Helper function to create a linked list from a list
 def create_linked_list(values):
     if not values:

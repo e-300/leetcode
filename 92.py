@@ -32,6 +32,19 @@ class Solution:
         return head.next 
     
 
+    def reverseBtw(self, head: ListNode, left: int, right: int) -> ListNode:
+
+        dummy_head = ListNode(-1)
+
+        dummy_head = head
+
+        while head:
+            print(head.val)
+
+            head = head.next
+            
+    
+
 
 
 
@@ -65,17 +78,17 @@ if __name__ == "__main__":
     # Test case 1
     head1 = create_linked_list([1, 2, 3, 4, 5])
     left1, right1 = 2, 4
-    result1 = solution.reverseBetween(head1, left1, right1)
+    result1 = solution.reverseBtw(head1, left1, right1)
     print(f"Test 1: {linked_list_to_array(result1)}")  # Expected: [1, 4, 3, 2, 5]
     
     # Test case 2
     head2 = create_linked_list([5])
     left2, right2 = 1, 1
-    result2 = solution.reverseBetween(head2, left2, right2)
+    result2 = solution.reverseBtw(head2, left2, right2)
     print(f"Test 2: {linked_list_to_array(result2)}")  # Expected: [5]
     
     # Test case 3
     head3 = create_linked_list([3, 5, 7, 9, 11])
     left3, right3 = 1, 5
-    result3 = solution.reverseBetween(head3, left3, right3)
+    result3 = solution.reverseBtw(head3, left3, right3)
     print(f"Test 3: {linked_list_to_array(result3)}")  # Expected: [3, 9, 7, 5, 11]

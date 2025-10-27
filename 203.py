@@ -24,6 +24,28 @@ class Solution:
                 current = current.next
 
         return dummmy_head.next
+    
+
+    
+    def removeElementsArr(self, head: ListNode, val: int) -> ListNode:
+        arr = []
+
+        while head:
+
+            if head.val != val:
+                arr.append(head.val)
+        
+            head = head.next
+
+        head = ListNode(0)
+        current = head
+
+        for val in arr[0:]:
+
+            current.next = ListNode(val)
+            current = current.next
+            
+        return head.next
 
             
 
